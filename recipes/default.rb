@@ -39,3 +39,19 @@ end
 package "php5-xhprof" do
     action :install
 end
+
+# Install nginx config
+template "/etc/nginx/sites-available/xhprof" do
+    source "nginx-config.erb"
+    mode 0644
+end
+
+bash "Enable XHProf for nginx" do
+    code <<-EOH
+        sudo ln -sf /etc/nginx/sites-available/xhprof /etc/nginx/sites-enabled/xhprof
+    EOH
+end
+
+service "nginx" do
+    action :reload
+end
