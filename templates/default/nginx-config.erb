@@ -1,5 +1,5 @@
 server {
-    server_name xhprof;
+    server_name <%= node['xhprof']['domain'] %>;
     root   /home/vagrant/.xhprof/xhprof_html;
     index index.php;
 
